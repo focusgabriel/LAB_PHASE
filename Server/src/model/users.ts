@@ -1,0 +1,73 @@
+import {Schema, model} from "mongoose";
+
+type Iuser = {
+  name:string,
+  email:string,
+  password:string,
+  refreshToken?:string | null,
+  createdAt?:Date,
+  updatedAt?:Date,
+  isVerified: boolean,
+  verificationToken: string | undefined,
+  verificationTokenExpires: Date | undefined,
+  passwordResetToken?: string | undefined;
+  passwordResetExpires?: Date | undefined;
+}
+
+export const UserProps = new Schema<Iuser>({
+  name: {
+    type: String,
+    required: true,
+    trim: true
+  },
+
+  email: {
+    type: String,
+    required: true,
+    trim: true,
+    unique: true,
+    lowercase: true
+  },
+
+  password: {
+    type: String,
+    required: true,
+    trim: true
+  },
+
+  refreshToken: {
+    type: String,
+    default: null
+  },
+
+  isVerified: {
+    type: Boolean,
+    default: false
+  },
+
+  verificationToken: {
+    type: String, 
+    default: null
+  },
+
+  verificationTokenExpires: {
+    type: Date,
+    default: null
+  },
+
+  passwordResetToken: {
+    type: String,
+    default: null,
+  },
+
+  passwordResetExpires: {
+    type: Date,
+    default: null,
+  },
+
+},
+  {
+    timestamps: true
+  }
+)
+
